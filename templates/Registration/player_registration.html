@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{{c}}{% endblock %}
+
+{% block body %}
+
+<h2>{{c}}</h2>
+<form method="post">
+  {% csrf_token %}
+    <p>{{user_form.as_p}}</p>
+    <p>{{player_form.as_p}}</p>
+    <br><br>
+
+  <button type="submit">Registration</button>
+</form>
+
+{% endblock %}

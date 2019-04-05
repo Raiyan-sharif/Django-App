@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Admin Site{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+        {% if user.is_admin %}
+        <meta http-equiv="refresh" content="0; URL='/admin/'" />
+        <h1>This Admin panel Mr. {{user}}</h1>
+        {% endif %}
+        <!--<meta http-equiv="refresh" content="0; URL='/admin/'" />-->
+    {% else %}
+    <h1>Forbidden</h1>
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}LogIn{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+  <form method="post">
+  {% csrf_token %}
+    <meta http-equiv="REFRESH" content="0;url={{ '/'}}">
+
+  <button type="submit">Login</button>
+</form>
+
+{% else %}
+<h2>Login</h2>
+<form method="post">
+  {% csrf_token %}
+    <pr>User Name or Phone Number : {{ form.username }}</pr>
+    <br><br>
+    <pr>Password : {{ form.password}}</pr>
+    <br><br>
+
+  <button type="submit">Login</button>
+</form>
+{% endif %}
+
+{% endblock %}

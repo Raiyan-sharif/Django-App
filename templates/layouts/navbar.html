@@ -1,0 +1,29 @@
+<ul>
+    <li><a href="/">Home</a></li>
+    {% if user.is_authenticated %}
+
+    {% for u in userobj %}
+    {% if u.pk %}
+    <li><a href="{% url 'accounts:user_profile' pk=u.pk %}">Profile</a></li>
+    {% elif form.pk %}
+    <li><a href="{% url 'accounts:user_profile' pk=form.pk %}">Profile</a></li>
+    {% endif %}
+
+    {% endfor %}
+    <li><a href="#">Settings</a>
+        <ul>
+            <li><a href="/accounts/change-password/">Change Password</a></li>
+        </ul>
+    </li>
+    <li><a href="/accounts/logout/">Logout</a></li>
+    {% else %}
+    <li><a href="/accounts/login/">Login</a></li>
+    <li><a href="#">Register</a>
+        <ul>
+            <li><a href="/accounts/player_registration/">Player</a></li>
+            <li><a href="/accounts/club_registration/">Club</a></li>
+        </ul>
+    </li>
+    {% endif %}
+
+</ul>

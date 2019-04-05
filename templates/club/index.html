@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+        <h1>This is club panel</h1>
+    {% else %}
+    <h1>This Player is not valid</h1>
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Tournament</title>
+</head>
+<body>
+	<h1>Delete  {{query.tornament_name}}</h1>
+	<form method='POST' action='.'>{% csrf_token %}
+		Are you sure you want to delete this Tournament?
+		<input type="submit" value="Yes">
+		<a href="../">Cancel</a>
+	</form>
+</body>
+</html>

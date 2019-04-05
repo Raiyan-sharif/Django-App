@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Club list</title>
+</head>
+<body>
+	<h1>
+		Club list:
+	</h1>
+    <form method="GET">{% csrf_token %}
+    	<input type="text" name="q" placeholder="Search"><br>
+	{% for attr in query %}
+<!--http://127.0.0.1:8000/sportex/player/1/-->
+		
+		<a href="{{attr.pk}}">{{attr.tornament_name   }}</a>
+		<br>
+
+	{%endfor %}
+
+	</form>
+</body>
+</html>

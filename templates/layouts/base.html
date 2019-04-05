@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %} {% endblock %}</title>
+
+</head>
+
+<body>
+    <header>
+        {% include 'layouts/navbar.html' %}
+    </header>
+
+    <br>
+
+
+        {% block body %}
+            <!-- Html code goes here -->
+        {% endblock %}
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    {% block script %}
+        <!-- Javscript goes here -->
+    {% endblock %}
+</body>
+</html>

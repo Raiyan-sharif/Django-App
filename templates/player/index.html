@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+        {% if user.is_player %}
+        <h1>Name: {{user}}</h1><br>
+        {% for player in playerobj %}
+            {% if player.profile_pic %}
+                <img src="{{player.profile_pic.url}}"/><br>
+            {% endif %}
+            <h1>Player Id: {{player.pk}}</h1><br>
+            {% if player.home_club %}
+                <h1>Home Club: {{player.home_club}}</h1><br>
+            {% endif %}
+        <form method="GET" action="{% url 'tournament:upcoming_tournament' string='404' %}" name="form1">
+            <button type="submit" name="tournament" id="new_game" value="new_game" >New Game</button><br><br>
+            <button type="submit" name="tournament" value="tournament_history" id="tournament_history">Tournament History</button><br><br>
+            <button type="submit" name="tournament" value="upcoming_tournament" id="upcoming_tournament">Upcoming Tournament</button><br><br>
+            <button type="submit" name="tournament" id="onging_tournament" value="onging_tournament">Ongoing Tournament</button><br><br>
+            <button type="submit" name="tournament" value="edit" onclick="alert('page is under construction')">Edit</button><br><br>
+        </form>
+        {% endfor %}
+        {% else %}
+            <h1>You are not  authorized as a player</h1>
+        {% endif %}
+
+    {% else %}
+    <h1>This Player is not valid</h1>
+    {% endif %}
+{% endif %}
+{% endblock %}
+{% block script %}
+    <script>
+    $(document).ready(function(){
+        console.log('ok');
+
+    });
+    $("#onging_tournament").click(function () {
+        document.form1.action ="{% url 'tournament:upcoming_tournament' string='ongoing_tournament' %}";
+        console.log("ok working");
+    });
+    $("#upcoming_tournament").click(function () {
+        document.form1.action ="{% url 'tournament:upcoming_tournament' string='upcoming_tournament' %}";
+        console.log("ok working");
+    });
+    $("#tournament_history").click(function () {
+        document.form1.action ="{% url 'tournament:upcoming_tournament' string='tournament_history' %}";
+        console.log("ok working");
+    });
+    $("#new_game").click(function () {
+        document.form1.action ="{% url 'tournament:upcoming_tournament' string='new_game' %}";
+        console.log("ok working");
+    });
+  </script>
+{% endblock %}
+

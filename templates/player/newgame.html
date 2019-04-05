@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+        {% for player in playerobj %}
+
+        {% endfor %}
+            <p>Date : </p>
+            <input type="submit" value="Invite Player" name="inviteformatch">
+        {% else %}
+            <h1>You are not  authorized as a player</h1>
+        {% endif %}
+
+    {% else %}
+    <h1>This Player is not valid</h1>
+
+{% endif %}
+{% endblock %}

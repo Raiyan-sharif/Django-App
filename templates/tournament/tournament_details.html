@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CLUB Detail</title>
+</head>
+<body>
+	<form method="POST">{% csrf_token %}
+		<h1>tournament_id : {{query.pk}}<br></h1>
+		<h1>tornament_name :{{query.tornament_name}}<br></h1>
+		<h1>start_date : {{query.start_date}}<br></h1>
+		<h1>end_date : {{query.end_date}}<br></h1>
+		<h1>poster :{{query.poster}}<br></h1>
+		<h1>creation_date : {{query.creation_date}}<br></h1>
+		<h1>is_accepted : {{query.is_accepted}}<br></h1>
+		<h1>capacity :{{query.capacity}}<br></h1>
+		<h1>host_id : {{query.host_id}}<br></h1>
+		<h1>enrty_fee_with_hr_charge : {{query.enrty_fee_with_hr_charge}}<br></h1>
+		<h1>zone_location :{{query.zone_location}}<br></h1>
+		<h1>category_type : {{query.category_type}}<br></h1>
+		<h1>tournament_type : {{query.tournament_type}}<br></h1>
+	</form>
+</body>
+</html>

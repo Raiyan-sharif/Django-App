@@ -1,0 +1,95 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+		{%if user.is_club %}
+			<h1>Club user</h1>
+		{% elif user.is_a_player == True %}
+
+			<form method="POST">{% csrf_token %}
+				{% if btn == 'new_game' %}
+            <h1>Date: </h1><br><br>
+            <h1>Venue: </h1><br><br>
+            <h1>Playing with: </h1><br><br>
+            <h1>Race to: </h1><br><br>
+            <h1>Game type: </h1><br><br>
+            <input type="submit" value="Invite Player" name="inviteformatch">
+				{% endif %}
+
+
+				{% if btn == 'upcoming_tournament' %}
+					<h1>Upcoming Tournaments:</h1><br>
+				{% endif %}
+
+
+				{% if btn == 'onging_tournament' %}
+					<h1>On going Tournaments:</h1>
+				{% endif %}
+
+			{%for query in q %}
+				{% if btn == 'upcoming_tournament' %}
+				{% if query.upcomming_tournament %}
+					<h3>{{query.tornament_name}}<br></h3>
+					<h3>start date : {{query.start_date}}<br></h3>
+					<h3>probable ending date : {{query.end_date}}</h3>
+					<img src="/{{query.poster.url}}" alt="Poster"><br>
+					<h3>capacity :{{query.capacity}}<br></h3>
+					<h3>host_id : {{query.host_id}}<br></h3>
+					<h3>enrty fee with per hour charge : {{query.enrty_fee_with_per_hour_charge}}<br></h3>
+					<h3>zone location :{{query.zone_location}}<br></h3>
+					<h3>category type : {{query.category_type}}<br></h3>
+					<h3>tournament type : {{query.tournament_type}}<br></h3>
+					<h3>Prize Worth of : Tk {{query.prize_worth}}<br></h3>
+					<br>
+				{% endif %}
+				{% endif %}
+				{% if btn == 'onging_tournament' %}
+				{% if query.ongoing_tournament %}
+					<h3>{{query.tornament_name}}<br></h3>
+					<h3>start date : {{query.start_date}}<br></h3>
+					<h3>probable ending date : {{query.end_date}}</h3>
+					<img src="/{{query.poster.url}}" alt="Poster"><br>
+					<h3>capacity :{{query.capacity}}<br></h3>
+					<h3>host_id : {{query.host_id}}<br></h3>
+					<h3>enrty fee with per hour charge : {{query.enrty_fee_with_per_hour_charge}}<br></h3>
+					<h3>zone location :{{query.zone_location}}<br></h3>
+					<h3>category type : {{query.category_type}}<br></h3>
+					<h3>tournament type : {{query.tournament_type}}<br></h3>
+					<h3>Prize Worth of : Tk {{query.prize_worth}}<br></h3>
+					<br>
+				{% endif %}
+				{% endif %}
+				{% if btn == 'tournament_history' %}
+				{% if query.past_tournament %}
+					<h3>{{query.tornament_name}}<br></h3>
+					<h3>start date : {{query.start_date}}<br></h3>
+					<h3>probable ending date : {{query.end_date}}</h3>
+					<img src="/{{query.poster.url}}" alt="Poster"><br>
+					<h3>capacity :{{query.capacity}}<br></h3>
+					<h3>host_id : {{query.host_id}}<br></h3>
+					<h3>enrty fee with per hour charge : {{query.enrty_fee_with_per_hour_charge}}<br></h3>
+					<h3>zone location :{{query.zone_location}}<br></h3>
+					<h3>category type : {{query.category_type}}<br></h3>
+					<h3>tournament type : {{query.tournament_type}}<br></h3>
+					<h3>Prize Worth of : Tk {{query.prize_worth}}<br></h3>
+					<br>
+				{% endif %}
+				{% endif %}
+        	{% endfor %}
+	</form>
+        {% elif user.is_admin %}
+            <h1>Admin user</h1>
+		{% else %}
+			<h1>maximum recursion depth exceeded</h1>
+		{% endif %}
+	{% else %}
+	<h1>Not a club</h1>
+	{% endif %}
+
+{% else %}
+
+{% endif %}
+{% endblock %}

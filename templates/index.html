@@ -1,0 +1,82 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+		{%if user.is_club %}
+			<h1>Club user</h1>
+		{% elif user.is_a_player == True %}
+			<h1>This is a player</h1>
+        {% elif user.is_admin %}
+            <h1>Admin user</h1>
+		{% else %}
+			<h1>maximum recursion depth exceeded</h1>
+		{% endif %}
+	{% else %}
+	<h1>Not a club</h1>
+	{% endif %}
+
+{% else %}
+	<h1>Tag line : Your gateway to the billiard world</h1>
+	<h1>Why You should User this app?</h1>
+	<p>A lot of people love playing billiards, as it is a great way to improve your own skill, or simply pass the time with friends. However, there’s more to playing billiards than you might think, and we don’t just mean technique.
+
+Playing billiards actually has some health benefits. While you may not have thought about that aspect of the game before, you could be doing your body and mind a favor the next time you pick up a cue.</p>
+	<form method="POST">{% csrf_token %}
+		<h1>Upcoming Tournaments:</h1><br>
+			{%for query in q %}
+				{% if query.upcomming_tournament %}
+					<h3>{{query.tornament_name}}<br></h3>
+					<h3>start date : {{query.start_date}}<br></h3>
+					<h3>probable ending date : {{query.end_date}}</h3>
+					<img src="{{query.poster.url}}" alt="Poster"><br>
+					<h3>capacity :{{query.capacity}}<br></h3>
+					<h3>host_id : {{query.host_id}}<br></h3>
+					<h3>enrty fee with per hour charge : {{query.enrty_fee_with_per_hour_charge}}<br></h3>
+					<h3>zone location :{{query.zone_location}}<br></h3>
+					<h3>category type : {{query.category_type}}<br></h3>
+					<h3>tournament type : {{query.tournament_type}}<br></h3>
+					<h3>Prize Worth of : Tk {{query.prize_worth}}<br></h3>
+					<br>
+				{% endif %}
+        	{% endfor %}
+		<h1>On going Tournaments:</h1><br>
+			{%for query in q %}
+				{% if query.ongoing_tournament %}
+					<h3>{{query.tornament_name}}<br></h3>
+					<h3>start date : {{query.start_date}}<br></h3>
+					<h3>probable ending date : {{query.end_date}}</h3>
+					<img src="{{query.poster.url}}" alt="Poster"><br>
+					<h3>capacity :{{query.capacity}}<br></h3>
+					<h3>host_id : {{query.host_id}}<br></h3>
+					<h3>enrty fee with per hour charge : {{query.enrty_fee_with_per_hour_charge}}<br></h3>
+					<h3>zone location :{{query.zone_location}}<br></h3>
+					<h3>category type : {{query.category_type}}<br></h3>
+					<h3>tournament type : {{query.tournament_type}}<br></h3>
+					<h3>Prize Worth of : Tk {{query.prize_worth}}<br></h3>
+					<br>
+				{% endif %}
+			{% endfor %}
+		<h1>Previous Tournaments History:</h1><br>
+			{%for query in q %}
+				{% if query.past_tournament %}
+					<h3>{{query.tornament_name}}<br></h3>
+					<h3>start date : {{query.start_date}}<br></h3>
+					<h3>probable ending date : {{query.end_date}}</h3>
+					<img src="{{query.poster.url}}" alt="Poster"><br>
+					<h3>capacity :{{query.capacity}}<br></h3>
+					<h3>host_id : {{query.host_id}}<br></h3>
+					<h3>enrty fee with per hour charge : {{query.enrty_fee_with_per_hour_charge}}<br></h3>
+					<h3>zone location :{{query.zone_location}}<br></h3>
+					<h3>category type : {{query.category_type}}<br></h3>
+					<h3>tournament type : {{query.tournament_type}}<br></h3>
+					<h3>Prize Worth of : Tk {{query.prize_worth}}<br></h3>
+					<br>
+				{% endif %}
+        	{% endfor %}
+
+	</form>
+{% endif %}
+{% endblock %}

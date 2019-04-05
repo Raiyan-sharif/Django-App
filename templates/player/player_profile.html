@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+		{%if user.is_club %}
+			<h1>You are not allowed here</h1>
+		{% elif user.is_a_player == True %}
+            <h1>Player Profile:</h1>
+            {% for user in userobj %}
+                <h3>User Name: {{user.username}}<br></h3>
+                <h3>Email: {{user.email}}<br></h3>
+                <h3>Phone Number: {{user.phone_number}}<br></h3>
+                <h3>Joining Date: {{user.joining_date}}<br></h3>
+            {% endfor %}
+            {% for player in playerobj %}
+                <h3>Date of birth: {{player.date_of_birth}}<br></h3>
+                <h3>Nationality: {{player.nationality}}<br></h3>
+                <h3>Gender: {{player.gender}}<br></h3>
+                <h3>Marital Status: {{player.marital_status}}<br></h3>
+                <h3>Home Club: {{player.home_club}}<br></h3>
+                <h3>Game Frequency: {{player.gameFrequency}}<br></h3>
+                 <img src="/{{player.profile_pic.url}}"/><br>
+                <a href="{% url 'accounts:user_update' pk=player.user.pk %}">Edit</a>
+            {% endfor %}
+        {% elif user.is_admin %}
+            <h1>You logged in as admin user</h1>
+		{% else %}
+			<h1>Login to use the app</h1>
+		{% endif %}
+	{% else %}
+	<h1>You active user</h1>
+	{% endif %}
+
+{% else %}
+	<h1></h1>
+{% endif %}
+{% endblock %}

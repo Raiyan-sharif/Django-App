@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+	{%if user.is_active %}
+		{%if user.is_club %}
+			<h1>You are not allowed here</h1>
+		{% elif user.is_a_player == True %}
+            <h2>{{c}}</h2>
+            <form method="post">
+              {% csrf_token %}
+
+                <p>{{form.as_p}}</p>
+                <p>{{form2.as_p}}</p>
+                <br><br>
+
+              <button type="submit">Save</button>
+            </form>
+
+        {% elif user.is_admin %}
+            <h1>You logged in as admin user</h1>
+		{% else %}
+			<h1>Login to use the app</h1>
+		{% endif %}
+	{% else %}
+	<h1>You active user</h1>
+	{% endif %}
+
+{% else %}
+	<h1></h1>
+{% endif %}
+{% endblock %}
