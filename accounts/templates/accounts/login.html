@@ -1,0 +1,67 @@
+{% extends 'layouts/master.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% load widget_tweaks %}
+
+{% block body %}
+
+<div class='container'>
+    <div class='row justify-content-md-center'>
+        <div class="col-6">
+            <div class='modal-content' style='margin-top:40px'>
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign in to Billiarmate</h4>
+                </div>
+                <div class="modal-body">
+                    {% if error_message %}
+                        <div class='alert alert-danger'>
+                            {{error_message}}
+                        </div>
+                    {% endif %}
+                    <form method="POST" action="{% url 'accounts:login' %}" novalidate>
+                        {% csrf_token %}
+                        {% for field in form.visible_fields %}
+                            <div class='form-group'>
+                            {% if form.is_bound %}
+                                {% if field.errors %}
+                                    {% render_field field class='form-control is-invalid' %}
+                                    {% for error in field.errors %}
+                                        <div class='invalid-feedback'>
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                 {% else %}
+                                        {% render_field field class='form-control is-valid' %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class='form-control' %}
+                            {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class='form-group'>
+                            <input type="submit" value="Continue" class='form-control btn btn-danger'>
+                            <!-- <div>Forget password?</div> -->
+                        </div>
+                    </form>
+                    <div>
+                        <div>Or continue with</div>
+                        <div class='row justify-content-md-center'>
+                            <div class='col-6'><button class='form-control btn btn-primary'>Facebook</button></div>
+                            <div class='col-6'><button class='form-control btn btn-success'>Google</button></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Not Register Now Yet?</div>
+                        <div class='row justify-content-md-center'>
+                            <div class='col-12'><a href="{% url 'account:register' %}" class='form-control btn btn-md btn-default'>Register Now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ {% endblock %}
